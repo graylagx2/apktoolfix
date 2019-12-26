@@ -2,7 +2,7 @@
 
 #Author: graylagx2
 #Name: apktoolfix
-#Version: 2.0
+#Version: 2.1
 #Description: Fix for apktool in kali linux.
 #Contact: graylagx2@gmail.com
 
