@@ -116,7 +116,9 @@ APKTOOL_UPGRADE() {
 APKTOOL_VERSION() {
     echo -e "\n${BLUE}[-]${YELLOW} Checking the version of ${BLUE}Apktool${YELLOW} you have installed.${RESTORE}"
     sleep 1
-    if [ $(apktool --version | cut -d'.' -f2) -lt 4 ] || [ $(apktool --version | cut -d'.' -f2,3 | tr -d '.') -lt 41) ]; then
+    verCheck=$(apktool --version | cut -d'.' -f2)
+    vercheck_Latest=$(apktool --version | cut -d'.' -f2,3 | tr -d '.')
+    if [ $verCheck -lt 4 ] || [ $vercheck_Latest -lt 41) ]; then
         echo -e "\n${RED}**** ${YELLOW}Apktool is not the correct version! ${RED}****${RESTORE}\n"
         echo -e "${YELLOW}Removing Apktool version $(apktool --version 2>/dev/null) please wait...${RESTORE}"
         [[ -e /usr/bin/apktool ]] && rm -f /usr/bin/apktool
