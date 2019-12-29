@@ -103,7 +103,7 @@ fi
 # Upgrade and install latest version of apktool
 APKTOOL_UPGRADE() {
     (axel -n 10 --output=/usr/bin/apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool &>/dev/null;
-     axel -n 10 --output=/usr/bin/apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.0.jar &>/dev/null;
+     axel -n 10 --output=/usr/bin/apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar &>/dev/null;
      [[ -e /usr/bin/apktool ]] && [[ -e /usr/bin/apktool.jar ]] && chmod +x /usr/bin/apktool /usr/bin/apktool.jar) &
     echo
     PROG_MESSAGE="${YELLOW}Installing Apktool 2.4${RESTORE}"
@@ -116,8 +116,7 @@ APKTOOL_UPGRADE() {
 APKTOOL_VERSION() {
     echo -e "\n${BLUE}[-]${YELLOW} Checking the version of ${BLUE}Apktool${YELLOW} you have installed.${RESTORE}"
     sleep 1
-    verCheck=$(apktool --version 2>/dev/null | cut -d'.' -f2)
-    if [ $verCheck -lt 4 ] || [ $(apktool --version 2>/dev/null | grep "dirty") ]; then
+    if [ $(apktool --version | cut -d'.' -f2) -lt 4 ] || [ $(apktool --version | cut -d'.' -f2,3 | tr -d '.') -lt 41) ]; then
         echo -e "\n${RED}**** ${YELLOW}Apktool is not the correct version! ${RED}****${RESTORE}\n"
         echo -e "${YELLOW}Removing Apktool version $(apktool --version 2>/dev/null) please wait...${RESTORE}"
         [[ -e /usr/bin/apktool ]] && rm -f /usr/bin/apktool
