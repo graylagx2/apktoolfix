@@ -1,4 +1,4 @@
-#!/bin/bash/env bash 
+#!/bin/bash
 
 #Author: graylagx2
 #Name: apktoolfix
