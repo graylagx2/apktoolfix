@@ -109,6 +109,7 @@ APKTOOL_UPGRADE() {
     PROG_MESSAGE="${YELLOW}Installing Apktool 2.4${RESTORE}"
     COMP_MESSAGE="${YELLOW}Installed Apktool 2.4${RESTORE}"
     spinLoader
+    apktool empty-framework-dir --force
     APKTOOL_VERSION
 }
 
