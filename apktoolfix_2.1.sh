@@ -124,6 +124,7 @@ APKTOOL_VERSION() {
         [[ -e /usr/bin/apktool.jar ]] && rm -f /usr/bin/apktool.jar
         APKTOOL_UPGRADE   
     else
+        apktool empty-framework-dir --force
         echo -e "\n${YELLOW}  Apktool is the ${GREEN}Correct${YELLOW} version${RESTORE}" 
         sleep 1
     fi
