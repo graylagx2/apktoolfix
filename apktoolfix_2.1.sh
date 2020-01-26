@@ -102,14 +102,14 @@ fi
 
 # Upgrade and install latest version of apktool
 APKTOOL_UPGRADE() {
-    (axel -n 10 --output=/usr/bin/apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool &>/dev/null;
-     axel -n 10 --output=/usr/bin/apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar &>/dev/null;
+    (wget -O /usr/bin/apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool &>/dev/null;
+     wget -O /usr/bin/apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar &>/dev/null;
      [[ -e /usr/bin/apktool ]] && [[ -e /usr/bin/apktool.jar ]] && chmod +x /usr/bin/apktool /usr/bin/apktool.jar) &
     echo
     PROG_MESSAGE="${YELLOW}Installing Apktool 2.4${RESTORE}"
     COMP_MESSAGE="${YELLOW}Installed Apktool 2.4${RESTORE}"
     spinLoader
-    apktool empty-framework-dir --force
+    [[ -e /root/.local/share/apktool/framework/1.apk ]] && apktool empty-framework-dir --force
     APKTOOL_VERSION
 }
 
@@ -117,14 +117,14 @@ APKTOOL_UPGRADE() {
 APKTOOL_VERSION() {
     echo -e "\n${BLUE}[-]${YELLOW} Checking the version of ${BLUE}Apktool${YELLOW} you have installed.${RESTORE}"
     sleep 1
-    if [ $(apktool --version | cut -d'.' -f2) -lt 4 ] || [ $(apktool --version | cut -d'.' -f2,3 | tr -d '.') -lt 41 ]; then
+    if [ $(apktool --version | cut -d'.' -f2,3 | tr -d '.' | cut -f1 -d'-') -lt 41 ]; then
         echo -e "\n${RED}**** ${YELLOW}Apktool is not the correct version! ${RED}****${RESTORE}\n"
         echo -e "${YELLOW}Removing Apktool version $(apktool --version 2>/dev/null) please wait...${RESTORE}"
         [[ -e /usr/bin/apktool ]] && rm -f /usr/bin/apktool
         [[ -e /usr/bin/apktool.jar ]] && rm -f /usr/bin/apktool.jar
         APKTOOL_UPGRADE   
     else
-        apktool empty-framework-dir --force
+        [[ -e /root/.local/share/apktool/framework/1.apk ]] && apktool empty-framework-dir --force
         echo -e "\n${YELLOW}  Apktool is the ${GREEN}Correct${YELLOW} version${RESTORE}" 
         sleep 1
     fi
