@@ -2,7 +2,7 @@
 
 #Author: graylagx2
 #Name: apktoolfix
-#Version: 2.1
+#Version: 2.1.2
 #Description: Fix for apktool in kali linux.
 #Contact: graylagx2@gmail.com
 
@@ -39,7 +39,7 @@ echo '
         |_______|__| |___._|___  |_______|___._|___  |__.__|______|
                            |_____|             |_____|             
 '                                                                     
-echo -e "${YELLOW}                           Apktool-Fix Version ${BLUE}2.1${RESTORE}\n"
+echo -e "${YELLOW}                           Apktool-Fix Version ${BLUE}2.1.2${RESTORE}\n"
 echo -e "${L_GREY}This script was developed to be used with the kali-linux distribution any use outside of this distribution may not work${RESTORE}\n"
 sleep 2
                                                       
@@ -106,10 +106,10 @@ APKTOOL_UPGRADE() {
      wget -O /usr/bin/apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar &>/dev/null;
      [[ -e /usr/bin/apktool ]] && [[ -e /usr/bin/apktool.jar ]] && chmod +x /usr/bin/apktool /usr/bin/apktool.jar) &
     echo
-    PROG_MESSAGE="${YELLOW}Installing Apktool 2.4${RESTORE}"
-    COMP_MESSAGE="${YELLOW}Installed Apktool 2.4${RESTORE}"
+    PROG_MESSAGE="${YELLOW}Installing Apktool 2.4.1${RESTORE}"
+    COMP_MESSAGE="${YELLOW}Installed Apktool 2.4.1${RESTORE}"
     spinLoader
-    [[ -e /root/.local/share/apktool/framework/1.apk ]] && apktool empty-framework-dir --force
+    [[ -e /root/.local/share/apktool/framework/1.apk ]] && apktool empty-framework-dir --force &>/dev/null && echo -e "\n${YELLOW}  Emptying framework-dir" 
     APKTOOL_VERSION
 }
 
@@ -117,14 +117,14 @@ APKTOOL_UPGRADE() {
 APKTOOL_VERSION() {
     echo -e "\n${BLUE}[-]${YELLOW} Checking the version of ${BLUE}Apktool${YELLOW} you have installed.${RESTORE}"
     sleep 1
-    if [ $(apktool --version | cut -d'.' -f2,3 | tr -d '.' | cut -f1 -d'-') -lt 41 ]; then
+    if [ ! -e /usr/bin/apktool.jar ] || [ $(apktool --version | cut -d'.' -f2,3 | tr -d '.' | cut -f1 -d'-' 2>/dev/null) -lt 41 ]; then
         echo -e "\n${RED}**** ${YELLOW}Apktool is not the correct version! ${RED}****${RESTORE}\n"
         echo -e "${YELLOW}Removing Apktool version $(apktool --version 2>/dev/null) please wait...${RESTORE}"
         [[ -e /usr/bin/apktool ]] && rm -f /usr/bin/apktool
         [[ -e /usr/bin/apktool.jar ]] && rm -f /usr/bin/apktool.jar
         APKTOOL_UPGRADE   
     else
-        [[ -e /root/.local/share/apktool/framework/1.apk ]] && apktool empty-framework-dir --force
+        [[ -e /root/.local/share/apktool/framework/1.apk ]] && apktool empty-framework-dir --force &>/dev/null && echo -e "\n${YELLOW}  Emptying framework-dir" 
         echo -e "\n${YELLOW}  Apktool is the ${GREEN}Correct${YELLOW} version${RESTORE}" 
         sleep 1
     fi
