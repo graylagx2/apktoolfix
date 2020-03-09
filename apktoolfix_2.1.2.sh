@@ -3,7 +3,10 @@
 #Author: graylagx2
 #Name: apktoolfix
 #Version: 2.1.2
-#Description: Fix for apktool in kali linux.
+#Description: This bash script automates the process of fixing/installing a working 
+#             version of apktool. It also checks on system requirments to verify
+#             the script will have no issues working.
+#
 #Contact: graylagx2@gmail.com
 
 _SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
