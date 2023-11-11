@@ -106,11 +106,11 @@ fi
 # Upgrade and install latest version of apktool
 APKTOOL_UPGRADE() {
     (wget -O /usr/bin/apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool &>/dev/null;
-     wget -O /usr/bin/apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.4.1.jar &>/dev/null;
+     wget -O /usr/bin/apktool.jar https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar &>/dev/null;
      [[ -e /usr/bin/apktool ]] && [[ -e /usr/bin/apktool.jar ]] && chmod +x /usr/bin/apktool /usr/bin/apktool.jar) &
     echo
-    PROG_MESSAGE="${YELLOW}Installing Apktool 2.4.1${RESTORE}"
-    COMP_MESSAGE="${YELLOW}Installed Apktool 2.4.1${RESTORE}"
+    PROG_MESSAGE="${YELLOW}Installing Apktool 2.9.0${RESTORE}"
+    COMP_MESSAGE="${YELLOW}Installed Apktool 2.9.0${RESTORE}"
     spinLoader
     [[ -e /root/.local/share/apktool/framework/1.apk ]] && apktool empty-framework-dir --force &>/dev/null && echo -e "\n${YELLOW}  Emptying framework-dir" 
     APKTOOL_VERSION
